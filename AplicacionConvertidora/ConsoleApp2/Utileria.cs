@@ -6,25 +6,35 @@ namespace ConsoleApp2
 {
     static class Utileria
     {
-        private static DicctionaroNumerosALetras diccionario = new DicctionaroNumerosALetras();
-        public static string numeroARomano(int numero)
+        private static DicctionaroNumerosALetras diccionario = new DicctionaroNumerosALetras();        
+
+        public static string convertirNumeroALetras()
         {
-            string numeroRomano = "";
-            DiccionarioRomano diccionarioRomano = new DiccionarioRomano();
-            Dictionary<int, Dictionary<int, string>> diccionarioNumerosRomanos = diccionarioRomano.getDiccionarioNumerosRomanos();
-            List<int> numerosDescompuestos = obtenerNumeroDescompuesto(numero);
-            int indice = 1;
-            foreach (int numeroDescompuesto in numerosDescompuestos)
-            {                
-                string auxiliar = "";
-                auxiliar = diccionarioNumerosRomanos[indice][numeroDescompuesto];
-                numeroRomano = auxiliar + numeroRomano;
-                indice++;
+            string numeroLetras = "";
+            try
+            {
+                long numero = Convert.ToInt64(Console.ReadLine());
+                if (numero >= 0 && numero <= 999999999999)
+                {
+                    numeroLetras = numeroAletras(numero);
+                }
+                else
+                {
+                    throw new System.ArgumentException("El número debe estar dentro un rango de 0 a 999999999999");
+                }
             }
-            return numeroRomano;
+            catch (OverflowException)
+            {
+                throw new System.OverflowException("El número debe estar dentro un rango de 0 a 999999999999");
+            }
+            catch (FormatException)
+            {
+                throw new System.FormatException("Solo puede ingresar números");
+            }
+            return numeroLetras;
         }
 
-        public static string numeroAletras(long numero)
+        private static string numeroAletras(long numero)
         {
             if (numero == 0)
                 return "cero";           
@@ -65,19 +75,6 @@ namespace ConsoleApp2
                 }
             }
             return letras;
-        }
-
-        private static List<int> obtenerNumeroDescompuesto(int numero)
-        {
-            List<int> numeroDescompuesto = new List<int>();
-            int auxiliar;
-            while (numero != 0)
-            {
-                auxiliar = numero % 10;
-                numero /= 10;
-                numeroDescompuesto.Add(auxiliar);
-            }
-            return numeroDescompuesto;
-        }
+        }        
     }
 }

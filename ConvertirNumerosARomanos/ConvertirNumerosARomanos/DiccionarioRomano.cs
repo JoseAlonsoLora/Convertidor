@@ -40,7 +40,7 @@ namespace ConsoleApp2
         {
             Dictionary<int, string> unidades = new Dictionary<int, string>();
             unidades.Add(0, "");
-            unidades.Add(1,"I");
+            unidades.Add(1, "I");
             unidades.Add(2, "II");
             unidades.Add(3, "III");
             unidades.Add(4, "IV");
